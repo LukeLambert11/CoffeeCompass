@@ -1,0 +1,16 @@
+docker-compose down
+docker-compose down -v
+	2.	Remove Volumes (optional, if you want to start with a fresh database):
+
+docker-compose up --build -d
+docker-compose up -d
+
+
+docker-compose ps (check status)
+
+
+docker-compose exec db psql -U myuser -d coffeecompass
+
+\l               -- List all databases
+\c coffeecompass -- Connect to the coffeecompass database
+\dt              -- List all tables in the current database

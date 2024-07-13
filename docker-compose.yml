@@ -1,0 +1,26 @@
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: coffeecompass
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: 6502
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    command: ["gunicorn", "--bind", "0.0.0.0:8000", "coffeecompass.wsgi:application"]
+    volumes:
+      - ./backend:/backend
+    working_dir: /backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

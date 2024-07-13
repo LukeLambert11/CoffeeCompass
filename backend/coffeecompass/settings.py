@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
 from pathlib import Path
+import sys
+print(sys.path)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure--a1p(x!-&z^c9mre7%@dxdk$wiz1q#$75649kli3qnzm%!^rdx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
 
 
 # Application definition
@@ -37,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'coffeeShops'
+    'coffeeShops.apps.CoffeeShopsConfig',
 ]
 
 MIDDLEWARE = [
@@ -77,11 +79,11 @@ WSGI_APPLICATION = 'coffeecompass.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coffeecompass',
-        'USER': 'myuser',
-        'PASSWORD': '6502',
-        'HOST': 'localhost',  # Or your database server's IP address
-        'PORT': '5432',       # Default PostgreSQL port
+        'NAME': os.getenv('POSTGRES_DB', 'coffeecompass'),
+        'USER': os.getenv('POSTGRES_USER', 'myuser'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', '6502'),
+        'HOST': os.getenv('DB_HOST', 'db'),
+        'PORT': '5432',
     }
 }
 
