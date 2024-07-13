@@ -8,9 +8,11 @@ docker-compose up -d
 
 docker-compose ps (check status)
 
-
+docker-compose exec web python manage.py createsuperuser
 docker-compose exec db psql -U myuser -d coffeecompass
 
 \l               -- List all databases
 \c coffeecompass -- Connect to the coffeecompass database
 \dt              -- List all tables in the current database
+
+coffeecompass=# SELECT * FROM "coffeeShopTable";
